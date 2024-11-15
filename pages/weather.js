@@ -1,0 +1,8 @@
+import Image from "next/image";
+import localFont from "next/font/local";
+
+export default function Home() {
+  return (
+    <div className="w-full h-screen bg-slate-950"></div>
+  );
+}
