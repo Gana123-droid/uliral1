@@ -37,7 +37,7 @@ return(
         </div>
         
         <div className={(grid ==false ? "w-full text-black mt-4" : "w-full text-black grid grid-cols-2 gap-x-8 mt-4" )}>
-            {data.map((data, index) => (
+            {data?.map((data, index) => (
                 <div key={index}>
                     <div className="border border-black rounded-lg p-4 mb-4">
                         <p className="text-sm font-bold">{data.Test}</p>
