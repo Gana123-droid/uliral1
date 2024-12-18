@@ -11,6 +11,7 @@ export default function Home(){
         <p className='border-2 border-pink-400 bg-purple-200 hover:bg-purple-400 flex p-4 w-full h-[200%] justify-center items-center rounded-lg shadow-xl text-purple-900' onClick={() => router.push("Search_filter")}>FilterSearch</p>
         <p className='border-2 border-pink-400 bg-purple-200 hover:bg-purple-400 flex p-4 w-full h-[200%] justify-center items-center rounded-lg shadow-xl text-purple-900' onClick={() => router.push("ungusolih")}>Color change</p>
         <p className='border-2 border-pink-400 bg-purple-200 hover:bg-purple-400 flex p-4 w-full h-[200%] justify-center items-center rounded-lg shadow-xl text-purple-900' onClick={() => router.push("weather")}>Weather</p>
+        <p className='border-2 border-pink-400 bg-purple-200 hover:bg-purple-400 flex p-4 w-full h-[200%] justify-center items-center rounded-lg shadow-xl text-purple-900' onClick={() => router.push("biydaalt")}>biy daalt</p>
   </div> 
    </div>
     );
