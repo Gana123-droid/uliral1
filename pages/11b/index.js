@@ -40,7 +40,7 @@ export default function Sfilter() {
         const result_ethics = await ethics.json();
         const result_province = await province.json();
         const result_historyFigure = await historyFigure.json();
-
+        
         setData([
           ...(result_tourist.touristAttractions || []),
           ...(result_clothes.clothes || []),
@@ -49,6 +49,7 @@ export default function Sfilter() {
           ...(result_ethics.ethnicGroups || []),
           ...(result_province.provinces || []),
           ...(result_historyFigure.historicalFigures || []),
+
         ]);
 
         setLoading(false); 
@@ -69,7 +70,7 @@ export default function Sfilter() {
   return (
     <div className="w-full min-h-screen bg-white">
       {loading ? (
-        <div className="w-full h-screen flex justify-center items-center flex-col">
+        <div className="w-full h-screen flex justify-center items-center flex-col gap-3">
         <div className="w-32 h-32 rounded-full border-4 border-blue-500 border-t-transparent bg-transparent animate-spin">
           
         </div>
@@ -100,37 +101,60 @@ export default function Sfilter() {
           </div>
 
           <div className="flex justify-center">
-            <div
-              className={`grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10 ${
-                grid ? "grid md:grid-cols-1 lg:grid-cols-1 w-[650px]" : ""
-              }`}
-            >
-              {filteredData.length > 0 ? (
-                filteredData.map((item) => (
-                  <div
-                    key={item.id}
-                    className="text-black border border-black shadow-lg rounded-md p-4 cursor-pointer"
-                    onClick={() => router.push(`/11b/${item.id}`)}
-                  >
-                    <img
-                      src={item.images}
-                      alt={item.name}
-                      className="w-full h-56 object-cover rounded-lg mb-4"
-                    />
-                    <p className="text-xl font-bold text-center">{item.name}</p>
-                    <p className="text-center">{item.description}</p>
-                    {item.address?.country && (
-                      <p className="opacity-75 text-center">{item.address.country}</p>
-                    )}
-                  </div>
-                ))
-              ) : (
-                <div className="text-black text-lg col-span-4 text-center">
-                  No results found for: <b>{search}</b>
-                </div>
-              )}
-            </div>
-          </div>
+  <div
+    className={` ${
+      grid
+        ? "grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 mx-20 mt-5 gap-3"
+        : "grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-10"
+    }`}
+  >
+    {filteredData.length > 0 ? (
+      filteredData.map((item) => (
+        <div
+          key={item.name}
+          className="text-black border border-black shadow-lg rounded-md p-4 cursor-pointer"
+          onClick={() => router.push(`/11b/slug/${item.id}`)}
+        >
+{grid ? (
+  <div className="flex flex-col md:flex-row items-center gap-4 w-full">
+    <img
+      src={item.images}
+      alt={item.name}
+      className="w-full min-w-[200px] md:max-w-[400px] max-h-[200px] md:h-[300px] object-cover rounded-lg"
+    />
+    <div className="flex flex-col justify-center text-center">
+      <p className="text-lg md:text-xl font-bold">{item.name}</p>
+      <p className="text-sm md:text-sm">{item.description}</p>
+      {item.address?.country && (
+        <p className="opacity-75 text-sm">{item.address.country}</p>
+      )}
+    </div>
+  </div>
+) : (
+  <>
+    <img
+      src={item.images}
+      alt={item.name}
+      className="w-full h-56 object-cover rounded-lg mb-4"
+    />
+    <p className="text-lg font-bold text-center">{item.name}</p>
+    <p className="text-center text-sm">{item.description}</p>
+    {item.address?.country && (
+      <p className="opacity-75 text-center text-sm">{item.address.country}</p>
+    )}
+  </>
+)}
+
+        </div>
+      ))
+    ) : (
+      <div className="text-black text-lg col-span-4 text-center">
+        No results found for: <b>{search}</b>
+      </div>
+    )}
+  </div>
+</div>
+
         </>
       )}
     </div>

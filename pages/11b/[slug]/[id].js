@@ -51,6 +51,7 @@ export default function ID() {
               ...(result_province.provinces ),
               ...(result_historyFigure.historicalFigures ),
             ]);
+            setLoading(false);
           } catch (error) {
             setLoading(false);
             console.log(error);
@@ -60,10 +61,22 @@ export default function ID() {
       }, []);
       return(
         <div>
-            {loading && <p>...Loading</p>}
+            {loading ? (
+        <div className="w-full h-screen flex justify-center items-center flex-col gap-3">
+        <div className="w-32 h-32 rounded-full border-4 border-blue-500 border-t-transparent bg-transparent animate-spin">
+          
+        </div>
+        <div className="flex flex-row"><div className="text-xl text-white">Loading</div>
+        <div className="animate-bounce text-xl  text-white">.</div>
+        <div className="animate-bounce text-xl    text-white" style={{ animationDelay: "0.2s" }}>.</div>
+        <div className="animate-bounce text-xl   text-white" style={{ animationDelay: "0.4s" }}>.</div>
+        </div>
+        </div>
+      ) : (
+        <>
             <button className="border-md border-black " onClick={() => router.back()}>Back</button>
-            {(data || []).map((item, index) =>
-            router.query.id === item.id ? (
+            {(data || []).  map((item, index) =>
+            router.query.id === item.id && router.query.slug == item.name ? (
                 <div>
                     {item.name} {item.description}
                     <img src={item?.images} className="w-40 object-cover"/>
@@ -72,6 +85,8 @@ export default function ID() {
                 <div></div>
             )
             )}
+            </>
+          )}
             </div>
     
       );
